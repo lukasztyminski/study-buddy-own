@@ -1,0 +1,6 @@
+export const Flex = ($direction = 'row', $align = 'flex-start', $justify = 'flex-start') => `
+	display: flex;
+	flex-direction: ${$direction};
+	align-items: ${$align};
+	justify-content: ${$justify}
+`;
