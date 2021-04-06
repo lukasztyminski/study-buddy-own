@@ -2,8 +2,7 @@ import React from 'react';
 import { GlobalStyle } from 'styles/globalStyle';
 import styled, { ThemeProvider } from 'styled-components';
 import { theme } from 'styles/theme';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import UsersProvider from '../providers/UsersProvider';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import MainTemplate from 'components/templates/MainTemplate/MainTemplate';
 import Dashboard from './Dashboard';
 import AddUser from './AddUser';
@@ -14,18 +13,19 @@ const Root = () => {
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <MainTemplate>
-          <UsersProvider>
-            <Wrapper>
-              <Switch>
-                <Route exact path="/">
-                  <Dashboard />
-                </Route>
-                <Route path="/add-user">
-                  <AddUser />
-                </Route>
-              </Switch>
-            </Wrapper>
-          </UsersProvider>
+          <Wrapper>
+            <Switch>
+              <Route exact path="/">
+                <Redirect to="/dashboard" />
+              </Route>
+              <Route path="/add-user">
+                <AddUser />
+              </Route>
+              <Route path="/dashboard/:id?">
+                <Dashboard />
+              </Route>
+            </Switch>
+          </Wrapper>
         </MainTemplate>
       </ThemeProvider>
     </Router>

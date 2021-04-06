@@ -1,23 +1,21 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { Flex, Wrapper } from './UsersListItem.styles';
+import { StyledAverage, StyledInfo, Wrapper } from './UsersListItem.styles';
 import DeleteButton from 'components/atoms/DeleteButton/DeleteButton';
-import Average from 'components/atoms/Average/Average';
-import { Title } from 'components/atoms/Title/Title';
 import { UserShape } from 'types';
-import { UsersContext } from 'providers/UsersProvider';
 
 const UsersListItem = ({ userData: { average, name, attendance = '0%' } }) => {
-  const { deleteUser } = useContext(UsersContext);
   return (
     <>
       <Wrapper key={`id-${name}`}>
-        <Average value={average}>{average}</Average>
-        <Flex>
-          <Title>{name}</Title>
+        <StyledAverage value={average}>{average}</StyledAverage>
+        <StyledInfo>
+          <p>
+            {name}
+            <DeleteButton />
+          </p>
           <p>attendance: {attendance}</p>
-        </Flex>
-        <DeleteButton onClick={() => deleteUser(name)} />
+        </StyledInfo>
       </Wrapper>
     </>
   );

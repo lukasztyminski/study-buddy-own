@@ -1,17 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { users as usersData } from 'data/User';
-
-const mockApi = (success) => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (usersData) {
-        resolve([...usersData]);
-      } else {
-        reject({ message: 'Error' });
-      }
-    }, 2000);
-  });
-};
+import axios from 'axios';
 
 export const UsersContext = createContext({
   users: [],
@@ -40,11 +28,10 @@ const UsersProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    mockApi()
-      .then((data) => {
-        setUsers(data);
-      })
-      .catch((err) => console.log(err));
+    axios
+      .get('/students')
+      .then(({ data }) => setUsers(data.students))
+      .catch((err) => console.error(err));
   }, []);
 
   return (
