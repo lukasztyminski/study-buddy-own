@@ -5,7 +5,6 @@ import { theme } from 'styles/theme';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import MainTemplate from 'components/templates/MainTemplate/MainTemplate';
 import Dashboard from './Dashboard';
-import AddUser from './AddUser';
 
 const Root = () => {
   return (
@@ -17,9 +16,6 @@ const Root = () => {
             <Switch>
               <Route exact path="/">
                 <Redirect to="/dashboard" />
-              </Route>
-              <Route path="/add-user">
-                <AddUser />
               </Route>
               <Route path="/dashboard/:id?">
                 <Dashboard />
