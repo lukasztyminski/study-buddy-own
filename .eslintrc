@@ -3,7 +3,8 @@
   "plugins": ["prettier"],
   "rules": {
     "prettier/prettier": ["warn", { "singleQuote": true, "printWidth": 150 }],
-    "import/first": 0
+    "import/first": 0,
+    "import/no-anonymous-default-export": ["warn", { "allowObject": true }]
   },
   "env": {
     "browser": true,
