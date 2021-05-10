@@ -1,13 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, Redirect, useParams } from 'react-router-dom';
 import { useStudents } from 'hooks/useStudents';
+import { useModal } from 'hooks/useModal';
 import { GroupWrapper, TitleWrapper, Wrapper } from './Dashboard.styles';
-import UsersList from 'components/organisms/StudentsList/StudentsList';
+import StudentsList from 'components/organisms/StudentsList/StudentsList';
 import { Title } from 'components/atoms/Title/Title';
+import Modal from 'components/organisms/Modal/Modal';
+import StudentDetails from 'components/molecules/StudentDetails/StudentDetails';
 
 const Dashboard = () => {
-  const { groups } = useStudents();
+  const [groups, setGroups] = useState([]);
+  const [currentStudent, setCurrentStudent] = useState([]);
+  const { getGroups, getStudentById } = useStudents();
+  const { isModalOpen, handleOpenModal, handleCloseModal } = useModal();
   const { id } = useParams();
+
+  useEffect(() => {
+    (async () => {
+      const groups = await getGroups();
+      setGroups(groups);
+    })();
+  }, [getGroups]);
+
+  const handleOpenStudentDetails = async (id) => {
+    const student = await getStudentById(id);
+    setCurrentStudent(student);
+    handleOpenModal();
+  };
 
   if (!id && groups.length > 0) return <Redirect to={`/dashboard/${groups[0]}`} />;
 
@@ -24,7 +43,12 @@ const Dashboard = () => {
         </nav>
       </TitleWrapper>
       <GroupWrapper>
-        <UsersList />
+        <StudentsList handleOpenStudentDetails={handleOpenStudentDetails} />
+        {isModalOpen ? (
+          <Modal handleClose={handleCloseModal}>
+            <StudentDetails student={currentStudent} />
+          </Modal>
+        ) : null}
       </GroupWrapper>
     </Wrapper>
   );

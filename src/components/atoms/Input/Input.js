@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 
 export const Input = styled.input`
-  padding: 5px 8px;
+  padding: 10px 12px;
   border: 1px solid ${({ theme }) => theme.colors.darkPurple};
   box-shadow: -2px 4px 10px rgba(115, 124, 142, 0.09);
   border-radius: 25px;
+  box-sizing: border-box;
+  font-size: ${({ theme }) => theme.fontSize.l};
 
   &:focus {
     outline: none;

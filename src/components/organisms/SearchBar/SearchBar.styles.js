@@ -43,19 +43,21 @@ export const SearchResults = styled.ul`
   top: 30px;
   display: flex;
   flex-direction: column;
+  visibility: ${({ isVisible }) => (isVisible ? 'visible' : 'hidden')};
   background-color: ${({ theme }) => theme.colors.white};
-  li {
-    font-weight: bold;
-    color: ${({ theme }) => theme.colors.darkGrey};
-    background-color: ${({ theme }) => theme.colors.white};
-    width: 100%;
-    padding: 20px 5px;
-  }
-  li:hover,
-  li:focus {
+`;
+
+export const SearchResultsItem = styled.li`
+  font-weight: bold;
+  color: ${({ theme }) => theme.colors.darkGrey};
+  background-color: ${({ theme, isHighlighted }) => (isHighlighted ? theme.colors.lightPurple : theme.colors.white)};
+  width: 100%;
+  padding: 20px 5px;
+  &:hover,
+  focus {
     background-color: ${({ theme }) => theme.colors.lightPurple};
   }
-  li:not(:last-child) {
+  &:not(:last-child) {
     border-bottom: 1px solid ${({ theme }) => theme.colors.darkPurple};
   }
 `;
