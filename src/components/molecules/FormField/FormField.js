@@ -8,7 +8,7 @@ const FormField = forwardRef(({ onChange, value, label, name, id, type = 'text',
   return (
     <Wrapper>
       <Label htmlFor={id}>{label}</Label>
-      <Input ref={ref} onChange={onChange} name={name} id={id} type={type} value={value} data-testid={label} />
+      <Input ref={ref} onChange={onChange} name={name} id={id} type={type} value={value} data-testid={label} {...props} />
     </Wrapper>
   );
 });
