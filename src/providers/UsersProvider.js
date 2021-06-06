@@ -28,10 +28,14 @@ const UsersProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    axios
-      .get('/students')
-      .then(({ data }) => setUsers(data.students))
-      .catch((err) => console.error(err));
+    (async () => {
+      try {
+        const response = await axios.get('/students');
+        setUsers(response.data.students);
+      } catch (e) {
+        console.log(e);
+      }
+    })();
   }, []);
 
   return (

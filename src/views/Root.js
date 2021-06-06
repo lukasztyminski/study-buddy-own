@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { GlobalStyle } from 'styles/globalStyle';
-import styled, { ThemeProvider } from 'styled-components';
-import { theme } from 'styles/theme';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import styled from 'styled-components';
+
 import MainTemplate from 'components/templates/MainTemplate/MainTemplate';
+import { useAuth } from 'hooks/useAuth';
 import Dashboard from './Dashboard';
 import FormField from 'components/molecules/FormField/FormField';
 import { Button } from 'components/atoms/Button/Button';
-import { useForm } from 'react-hook-form';
-import axios from 'axios';
 
 const AuthenticatedApp = () => {
   return (
@@ -27,7 +26,8 @@ const AuthenticatedApp = () => {
   );
 };
 
-const UnauthenticatedApp = ({ handleSignIn, loginError }) => {
+const UnauthenticatedApp = () => {
+  const auth = useAuth();
   const {
     register,
     handleSubmit,
@@ -43,58 +43,21 @@ const UnauthenticatedApp = ({ handleSignIn, loginError }) => {
   };
 
   return (
-    <form style={styledForm} onSubmit={handleSubmit(handleSignIn)}>
+    <form style={styledForm} onSubmit={handleSubmit(auth.signIn)}>
       <FormField id="login" label="login" defaultValue="teacher@studybuddy.com" {...register('login', { required: true })} />
       {errors.login && <span>Login is required</span>}
       <FormField id="password" label="password" type="password" {...register('password', { required: true })} />
       {errors.password && <span>Password is required</span>}
       <Button type="submit">Sign In</Button>
-      {loginError && <span>{loginError}</span>}
+      {/* {loginError && <span>{loginError}</span>} */}
     </form>
   );
 };
 
 const Root = () => {
-  const [user, setUser] = useState(null);
-  const [error, setError] = useState(null);
+  const auth = useAuth();
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      (async () => {
-        try {
-          const response = axios.get('/me', {
-            headers: {
-              authorization: `Bearer ${token}`,
-            },
-          });
-          setUser(response.data);
-        } catch (e) {
-          console.log(e);
-        }
-      })();
-    }
-  }, []);
-
-  const handleSignIn = async ({ login, password }) => {
-    try {
-      const response = await axios.post('/login', { login, password });
-      setUser(response.data);
-      localStorage.setItem('token', response.data.token);
-    } catch (e) {
-      console.log(e);
-      setError('Please provide valid user data');
-    }
-  };
-
-  return (
-    <Router>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        {user ? <AuthenticatedApp /> : <UnauthenticatedApp loginError={error} handleSignIn={handleSignIn} />}
-      </ThemeProvider>
-    </Router>
-  );
+  return auth.user ? <AuthenticatedApp /> : <UnauthenticatedApp />;
 };
 
 export default Root;

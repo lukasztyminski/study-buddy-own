@@ -1,7 +1,9 @@
 import React from 'react';
 import { Logo, StyledLink, Wrapper } from './Navigation.styles';
+import { useAuth } from 'hooks/useAuth';
 
 const Navigation = () => {
+  const auth = useAuth();
   return (
     <Wrapper>
       <Logo>
@@ -16,7 +18,7 @@ const Navigation = () => {
       </StyledLink>
       <StyledLink to="/add-user">Add user</StyledLink>
       <StyledLink to="/settings">Settings</StyledLink>
-      <StyledLink to="/logout" onClick={() => localStorage.removeItem('token')}>
+      <StyledLink to="/logout" onClick={auth.signOut}>
         Logout
       </StyledLink>
     </Wrapper>
