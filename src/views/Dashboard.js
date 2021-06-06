@@ -28,16 +28,16 @@ const Dashboard = () => {
     handleOpenModal();
   };
 
-  if (!id && groups.length > 0) return <Redirect to={`/dashboard/${groups[0]}`} />;
+  if (!id && groups.length > 0) return <Redirect to={`/group/${groups[0].id}`} />;
 
   return (
     <Wrapper>
       <TitleWrapper>
         <Title as="h2">Group {id}</Title>
         <nav>
-          {groups.map((group) => (
-            <Link key={group} to={`/dashboard/${group}`}>
-              {group}{' '}
+          {groups.map(({ id }) => (
+            <Link key={id} to={`/group/${id}`}>
+              {id}{' '}
             </Link>
           ))}
         </nav>
