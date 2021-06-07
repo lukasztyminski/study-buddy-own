@@ -7,7 +7,9 @@ import MainTemplate from 'components/templates/MainTemplate/MainTemplate';
 import { useAuth } from 'hooks/useAuth';
 import Dashboard from './Dashboard';
 import FormField from 'components/molecules/FormField/FormField';
+import ErrorMessage from 'components/molecules/ErrorMessage/ErrorMessage';
 import { Button } from 'components/atoms/Button/Button';
+import { useError } from 'hooks/useError';
 
 const AuthenticatedApp = () => {
   return (
@@ -56,8 +58,14 @@ const UnauthenticatedApp = () => {
 
 const Root = () => {
   const auth = useAuth();
+  const { error } = useError();
 
-  return auth.user ? <AuthenticatedApp /> : <UnauthenticatedApp />;
+  return (
+    <>
+      {error ? <ErrorMessage /> : null}
+      {auth.user ? <AuthenticatedApp /> : <UnauthenticatedApp />}
+    </>
+  );
 };
 
 export default Root;
