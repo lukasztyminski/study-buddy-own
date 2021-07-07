@@ -5,7 +5,8 @@ import styled from 'styled-components';
 
 import MainTemplate from 'components/templates/MainTemplate/MainTemplate';
 import { useAuth } from 'hooks/useAuth';
-import Dashboard from './Dashboard';
+import Dashboard from './Dashborad/Dashboard';
+import Notes from './Notes/Notes';
 import FormField from 'components/molecules/FormField/FormField';
 import ErrorMessage from 'components/molecules/ErrorMessage/ErrorMessage';
 import { Button } from 'components/atoms/Button/Button';
@@ -21,6 +22,9 @@ const AuthenticatedApp = () => {
           </Route>
           <Route path="/group/:id?">
             <Dashboard />
+          </Route>
+          <Route path="/notes">
+            <Notes />
           </Route>
         </Switch>
       </Wrapper>
