@@ -2,8 +2,9 @@ import React from 'react';
 
 import Navigation from 'components/organisms/Navigation/Navigation';
 import SearchBar from 'components/organisms/SearchBar/SearchBar';
-import { Wrapper } from 'components/templates/MainTemplate/MainTemplate.styles';
 import NewsSection from '../NewsSection/NewsSection';
+import { Wrapper } from './MainTemplate.styles';
+import NotesWidget from 'components/organisms/NotesWidget/NotesWidget';
 
 const MainTemplate = ({ children }) => {
   return (
@@ -12,6 +13,7 @@ const MainTemplate = ({ children }) => {
       <SearchBar />
       {children}
       <NewsSection />
+      <NotesWidget />
     </Wrapper>
   );
 };

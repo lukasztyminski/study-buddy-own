@@ -16,9 +16,12 @@
     "react-helmet": "^6.1.0",
     "react-hook-form": "^7.8.1",
     "react-modal": "^3.13.1",
+    "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.3",
+    "redux": "^4.1.0",
     "styled-components": "^5.2.1",
+    "uuid": "^8.3.2",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
@@ -68,7 +71,8 @@
     "prettier": "^2.2.1"
   },
   "resolutions": {
-    "babel-loader": "8.1.0"
+    "babel-loader": "8.1.0",
+    "webpack": "4.44.2"
   },
   "msw": {
     "workerDirectory": "public"

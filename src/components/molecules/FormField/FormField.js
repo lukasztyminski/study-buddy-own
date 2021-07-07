@@ -4,11 +4,15 @@ import PropTypes from 'prop-types';
 import { Label } from '../../atoms/Label/Label';
 import { Input } from '../../atoms/Input/Input';
 
-const FormField = forwardRef(({ onChange, value, label, name, id, type = 'text', ...props }, ref) => {
+const FormField = forwardRef(({ onChange, value, label, name, id, type = 'text', isTextarea, ...props }, ref) => {
   return (
     <Wrapper>
       <Label htmlFor={id}>{label}</Label>
-      <Input ref={ref} onChange={onChange} name={name} id={id} type={type} value={value} data-testid={label} {...props} />
+      {isTextarea ? (
+        <Input ref={ref} isTextarea as="textarea" onChange={onChange} name={name} id={id} value={value} data-testid={label} {...props} />
+      ) : (
+        <Input ref={ref} onChange={onChange} name={name} id={id} type={type} value={value} data-testid={label} {...props} />
+      )}
     </Wrapper>
   );
 });

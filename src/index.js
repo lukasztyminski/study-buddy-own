@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Root from 'views/Root';
+import Root from 'views/Root/Root';
+import 'assets/fonts/fonts.css';
 import { worker } from 'mocks/browser';
 import AppProviders from 'providers/AppProviders';
 

@@ -1,16 +1,16 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import styled from 'styled-components';
 
 import MainTemplate from 'components/templates/MainTemplate/MainTemplate';
 import { useAuth } from 'hooks/useAuth';
-import Dashboard from './Dashborad/Dashboard';
-import Notes from './Notes/Notes';
+import Dashboard from '../Dashborad/Dashboard';
+import Notes from '../Notes/Notes';
 import FormField from 'components/molecules/FormField/FormField';
 import ErrorMessage from 'components/molecules/ErrorMessage/ErrorMessage';
 import { Button } from 'components/atoms/Button/Button';
 import { useError } from 'hooks/useError';
+import { Wrapper } from './Root.styles';
 
 const AuthenticatedApp = () => {
   return (
@@ -55,7 +55,6 @@ const UnauthenticatedApp = () => {
       <FormField id="password" label="password" type="password" {...register('password', { required: true })} />
       {errors.password && <span>Password is required</span>}
       <Button type="submit">Sign In</Button>
-      {/* {loginError && <span>{loginError}</span>} */}
     </form>
   );
 };
@@ -73,11 +72,3 @@ const Root = () => {
 };
 
 export default Root;
-
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-`;
