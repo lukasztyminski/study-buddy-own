@@ -15,8 +15,8 @@ const Notes = () => {
     formState: { errors },
   } = useForm();
 
-  const handleAddNote = (note) => {
-    dispatch(addNote(note));
+  const handleAddNote = ({ title, content }) => {
+    dispatch(addNote({ title, content }));
   };
 
   return (
