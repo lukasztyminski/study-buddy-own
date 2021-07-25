@@ -2,21 +2,20 @@ import React from 'react';
 import { Button } from 'components/atoms/Button/Button';
 import Note from 'components/molecules/Note/Note';
 import { FormWrapper, NotesWrapper, StyledFormField, Wrapper } from './Notes.styles';
-import { useDispatch, useSelector } from 'react-redux';
-import { addNote } from 'store';
 import { useForm } from 'react-hook-form';
+import { useGetNotesQuery, useAddNoteMutation } from 'store';
 
 const Notes = () => {
-  const notes = useSelector((state) => state.notes);
-  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const { data, isLoading } = useGetNotesQuery();
+  const [addNote] = useAddNoteMutation();
 
   const handleAddNote = ({ title, content }) => {
-    dispatch(addNote({ title, content }));
+    addNote({ title, content });
   };
 
   return (
@@ -30,13 +29,17 @@ const Notes = () => {
           <Button type="submit">Add</Button>
         </FormWrapper>
       </form>
-      <NotesWrapper>
-        {notes.length ? (
-          notes.map(({ id, title, content }) => <Note id={id} key={id} title={title} content={content} />)
-        ) : (
-          <p>Create your first note</p>
-        )}
-      </NotesWrapper>
+      {isLoading ? (
+        <h2>Loading...</h2>
+      ) : (
+        <NotesWrapper>
+          {data.notes.length ? (
+            data.notes.map(({ id, title, content }) => <Note id={id} key={id} title={title} content={content} />)
+          ) : (
+            <p>Create your first note</p>
+          )}
+        </NotesWrapper>
+      )}
     </Wrapper>
   );
 };
