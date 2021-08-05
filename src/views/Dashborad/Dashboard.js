@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, Redirect, useParams } from 'react-router-dom';
 import { useStudents } from 'hooks/useStudents';
-import { useModal } from 'hooks/useModal';
+import { useModal } from 'components/organisms/Modal/useModal';
 import { GroupWrapper, TitleWrapper, Wrapper } from './Dashboard.styles';
 import StudentsList from 'components/organisms/StudentsList/StudentsList';
 import { Title } from 'components/atoms/Title/Title';

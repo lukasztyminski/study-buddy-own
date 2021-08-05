@@ -18,7 +18,7 @@ const NotesWidget = () => {
         ) : (
           <>
             {data.notes.length ? (
-              data.notes.map(({ id, title, content }) => <Note key={id} title={title} content={content} />)
+              data.notes.map(({ id, title, content }) => <Note key={id} id={id} title={title} content={content} />)
             ) : (
               <p>Create your first note</p>
             )}

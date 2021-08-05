@@ -18,4 +18,8 @@ export const ModalWrapper = styled(ReactModal)`
   &:focus {
     outline: none;
   }
+
+  .Overlay {
+    background: rgba(115, 124, 142, 0.6);
+  }
 `;
