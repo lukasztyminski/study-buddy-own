@@ -50,7 +50,7 @@ const UnauthenticatedApp = () => {
 
   return (
     <form style={styledForm} onSubmit={handleSubmit(auth.signIn)}>
-      <FormField id="login" label="login" defaultValue="teacher@studybuddy.com" {...register('login', { required: true })} />
+      <FormField id="login" label="login" {...register('login', { required: true })} />
       {errors.login && <span>Login is required</span>}
       <FormField id="password" label="password" type="password" {...register('password', { required: true })} />
       {errors.password && <span>Password is required</span>}
